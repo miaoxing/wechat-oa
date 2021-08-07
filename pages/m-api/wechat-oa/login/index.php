@@ -11,6 +11,21 @@ return new class extends BaseController {
     protected const MAX_RETRY = 3;
     protected $controllerAuth = false;
 
+    public function get()
+    {
+        $ret = $this->getAccount();
+        if ($ret->isErr()) {
+            return $ret;
+        }
+        $account = $ret['data'];
+
+        $url = $account->getOauth2Url($this->req['url'], 'snsapi_base');
+
+        return suc([
+            'url' => $url,
+        ]);
+    }
+
     public function post($req)
     {
         $ret = $this->getAccount();
