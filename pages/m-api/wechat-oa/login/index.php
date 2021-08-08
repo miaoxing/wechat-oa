@@ -7,7 +7,12 @@ use Miaoxing\WechatOa\Service\WechatOaAccountModel;
 use Miaoxing\WechatOa\Service\WechatOaUserModel;
 use Wei\Ret;
 
-return new class extends BaseController {
+return new
+/**
+ * @mixin UrlMixin
+ * @mixin LoggerMixin
+ */
+class extends BaseController {
     protected const MAX_RETRY = 3;
     protected $controllerAuth = false;
 
@@ -37,8 +42,13 @@ return new class extends BaseController {
         // 1. code 换取 OpenID
         $api = $account->getApi();
         $ret = $api->getOAuth2AccessTokenByAuth(['code' => $req['code']]);
+
         if (!isset($ret['openid'])) {
-            return err('很抱歉，微信授权失败，请返回再试');
+            return err([
+                'code' => $ret['code'],
+                'message' => ['很抱歉，微信授权失败，请返回再试。(%s)', $ret['message']],
+                'retryUrl' => $this->getRetryUrl($account),
+            ]);
         }
 
         // 2. 创建用户并登录
