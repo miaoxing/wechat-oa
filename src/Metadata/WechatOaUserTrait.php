@@ -23,7 +23,7 @@ namespace Miaoxing\WechatOa\Metadata;
  * @property string $tagIdList 被打上的标签ID列表
  * @property string $subscribeScene 关注的渠道来源
  * @property string $qrScene 二维码扫码场景
- * @property string $qrSceneStr 	二维码扫码场景描述
+ * @property string $qrSceneStr 二维码扫码场景描述
  * @property string|null $updatedInfoAt 最后更新信息时间
  * @property string|null $createdAt
  * @property string|null $updatedAt
