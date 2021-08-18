@@ -47,21 +47,25 @@ class WechatOaAccountModel extends BaseModel
      * 生成网页授权地址
      *
      * @param string|null $url
-     * @param string $scope
+     * @param string|null $scope
+     * @param string|null $state
      * @return string
      */
-    public function getOauth2Url(?string $url, string $scope): string
+    public function getOauth2Url(string $url = null, string $scope = null, string $state = null): string
     {
-        if (!$url) {
-            $url = $this->req->getUrl();
-        }
+        $url || $url = $this->req->getUrl();
+        $scope || $scope = $this->authScope ?: 'snsapi_base';
 
-        $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='
-            . $this->applicationId . '&redirect_uri=' . urlencode($url) . '&response_type=code&scope=' . $scope;
+        $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?'
+            . http_build_query(array_filter([
+                'appid' => $this->applicationId,
+                'redirect_uri' => $url,
+                'response_type' => 'code',
+                'scope' => $scope,
+                'state' => $state,
+                'component_appid' => $this->isAuthed ? wei()->wechatComponentApi->getAppId() : null,
+            ]));
 
-        if ($this->isAuthed) {
-            $url .= '&component_appid=' . wei()->wechatComponentApi->getAppId();
-        }
         return $url . '#wechat_redirect';
     }
 }

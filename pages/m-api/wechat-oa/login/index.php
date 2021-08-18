@@ -24,7 +24,7 @@ class extends BaseController {
         }
         $account = $ret['data'];
 
-        $url = $account->getOauth2Url($this->req['url'], 'snsapi_base');
+        $url = $account->getOauth2Url($this->req['url']);
 
         return suc([
             'url' => $url,
@@ -55,6 +55,20 @@ class extends BaseController {
         $oaUser = WechatOaUserModel::findOrInitBy(['openId' => $ret['openid']]);
         if (isset($ret['unionid'])) {
             $oaUser->unionId = $ret['unionid'];
+        }
+
+        if ($ret['scope'] === 'snsapi_userinfo') {
+            $http = $api->getSnsUserInfo($ret['openid'], $ret['access_token']);
+            if ($http->isSuccess()) {
+                $oaUser->nickName = $http['nickname'];
+                $oaUser->sex = $http['sex'];
+                $oaUser->language = $http['language'];
+                $oaUser->city = $http['city'];
+                $oaUser->province = $http['province'];
+                $oaUser->country = $http['country'];
+                $oaUser->headImgUrl = $http['headimgurl'];
+                $oaUser->privilege = $http['privilege'];
+            }
         }
 
         if ($oaUser->isNew()) {
@@ -118,6 +132,6 @@ class extends BaseController {
             . ($components['query'] ? ('?' . $components['query']) : '');
         $this->logger->debug('Wechat OAuth retry built url', $url);
 
-        return $account->getOauth2Url($url, 'snsapi_base');
+        return $account->getOauth2Url($url);
     }
 };
