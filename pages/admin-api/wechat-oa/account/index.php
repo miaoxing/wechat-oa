@@ -20,6 +20,6 @@ return new class extends BaseController {
 
     protected function getAccount()
     {
-        return WechatOaAccountModel::findOrInitBy([]);
+        return WechatOaAccountModel::findOrInitBy();
     }
 };
