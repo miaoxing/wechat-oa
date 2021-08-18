@@ -1,6 +1,7 @@
 import {Page, PageActions} from '@mxjs/a-page';
 import {Form, FormAction, FormItem} from '@mxjs/a-form';
-import {Radio} from 'antd';
+import {Radio, Space} from 'antd';
+import {Box} from '@mxjs/box';
 
 const Index = () => {
   return (
@@ -17,6 +18,20 @@ const Index = () => {
         </FormItem>
         <FormItem label="AppID（应用ID）" name="applicationId" required/>
         <FormItem label="AppSecret（应用密钥）" name="applicationSecret" required type="password"/>
+        <FormItem label="网页授权作用域" name="authScope">
+          <Radio.Group style={{marginTop: 5}}>
+            <Space direction="vertical">
+              <Radio value="snsapi_base">
+                静默授权（snsapi_base）
+                <Box color="gray.400">不弹出授权页面，直接跳转，只能获取用户 openid</Box>
+              </Radio>
+              <Radio value="snsapi_userinfo">
+                弹出授权页面（snsapi_userinfo）
+                <Box color="gray.400">弹出授权页面，可通过 openid 拿到昵称、性别、所在地。并且， 即使在未关注的情况下，只要用户授权，也能获取其信息 </Box>
+              </Radio>
+            </Space>
+          </Radio.Group>
+        </FormItem>
         <FormAction wrapperCol={{offset: 8}} list={false}/>
       </Form>
     </Page>
