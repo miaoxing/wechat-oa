@@ -42,13 +42,10 @@ class extends BaseController {
         // 1. code 换取 OpenID
         $api = $account->getApi();
         $ret = $api->getOAuth2AccessTokenByAuth(['code' => $req['code']]);
-
-        if (!isset($ret['openid'])) {
-            return err([
-                'code' => $ret['code'],
-                'message' => ['很抱歉，微信授权失败，请返回再试。(%s)', $ret['message']],
-                'retryUrl' => $this->getRetryUrl($account),
-            ]);
+        if (!$ret->isSuc()) {
+            $ret->setMessage(sprintf('很抱歉，微信授权失败，请返回再试。(%s)', $ret['message']));
+            $ret->set('retryUrl', $this->getRetryUrl($account));
+            return $ret;
         }
 
         // 2. 创建用户并登录
@@ -58,16 +55,16 @@ class extends BaseController {
         }
 
         if ($ret['scope'] === 'snsapi_userinfo') {
-            $http = $api->getSnsUserInfo($ret['openid'], $ret['access_token']);
-            if ($http->isSuccess()) {
-                $oaUser->nickName = $http['nickname'];
-                $oaUser->sex = $http['sex'];
-                $oaUser->language = $http['language'];
-                $oaUser->city = $http['city'];
-                $oaUser->province = $http['province'];
-                $oaUser->country = $http['country'];
-                $oaUser->headImgUrl = $http['headimgurl'];
-                $oaUser->privilege = $http['privilege'];
+            $ret = $api->getSnsUserInfo($ret['openid'], $ret['access_token']);
+            if ($ret->isSuc()) {
+                $oaUser->nickName = $ret['nickname'];
+                $oaUser->sex = $ret['sex'];
+                $oaUser->language = $ret['language'];
+                $oaUser->city = $ret['city'];
+                $oaUser->province = $ret['province'];
+                $oaUser->country = $ret['country'];
+                $oaUser->headImgUrl = $ret['headimgurl'];
+                $oaUser->privilege = $ret['privilege'];
             }
         }
 
