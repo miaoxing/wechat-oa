@@ -6,6 +6,7 @@ use Miaoxing\Plugin\Service\Tester;
 use Miaoxing\Plugin\Test\BaseTestCase;
 use Miaoxing\Wechat\Service\WechatApi;
 use Miaoxing\WechatOa\Service\WechatOaAccountModel;
+use Miaoxing\WechatOa\Service\WechatOaUserModel;
 
 class IndexTest extends BaseTestCase
 {
@@ -27,7 +28,8 @@ class IndexTest extends BaseTestCase
         $ret = Tester::request(['url' => 'https://test.com'])->get('/m-api/wechat-oa/login');
 
         $this->assertRetSuc($ret);
-        $this->assertSame('https://open.weixin.qq.com/connect/oauth2/authorize?appid=x&redirect_uri=https%3A%2F%2Ftest.com&response_type=code&scope=snsapi_base#wechat_redirect', $ret['url']);
+        $this->assertSame('https://open.weixin.qq.com/connect/oauth2/authorize?appid=x&redirect_uri=https%3A%2F%2Ftest.com&response_type=code&scope=snsapi_base#wechat_redirect',
+            $ret['url']);
     }
 
     public function testPost()
@@ -109,7 +111,8 @@ class IndexTest extends BaseTestCase
         $this->assertRetErr($ret);
 
         $this->assertSame('很抱歉，微信授权失败，请返回再试。(error)', $ret['message']);
-        $this->assertSame('https://open.weixin.qq.com/connect/oauth2/authorize?appid=x&redirect_uri=https%3A%2F%2Ftest.com%3Fretry%3D1&response_type=code&scope=snsapi_base#wechat_redirect', $ret['retryUrl']);
+        $this->assertSame('https://open.weixin.qq.com/connect/oauth2/authorize?appid=x&redirect_uri=https%3A%2F%2Ftest.com%3Fretry%3D1&response_type=code&scope=snsapi_base#wechat_redirect',
+            $ret['retryUrl']);
     }
 
     public function testPostRetryLimit()
@@ -153,5 +156,75 @@ class IndexTest extends BaseTestCase
 
         $this->assertSame('很抱歉，微信授权失败，请返回再试。(error)', $ret['message']);
         $this->assertNull($ret['retryUrl']);
+    }
+
+    public function testPostCreateUser()
+    {
+        $wechatApi = $this->getServiceMock(WechatApi::class, [
+            'getOAuth2AccessTokenByAuth',
+            'getSnsUserInfo',
+        ]);
+
+        $account = $this->getModelServiceMock(WechatOaAccountModel::class, [
+            'findBy',
+            'getApi',
+        ]);
+
+        $account->setOption('table', 'wechat_oa_accounts');
+
+        $account->expects($this->once())
+            ->method('getApi')
+            ->willReturn($wechatApi);
+
+        $wechatApi->expects($this->once())
+            ->method('getOAuth2AccessTokenByAuth')
+            ->with([
+                'code' => 'test-code',
+            ])
+            ->willReturn(suc([
+                'scope' => 'snsapi_userinfo',
+                'access_token' => 'access_token',
+                'openid' => 'test-openid',
+                'unionid' => 'test-unionid',
+            ]));
+
+        $wechatApi->expects($this->once())
+            ->method('getSnsUserInfo')
+            ->willReturn(suc([
+                'nickname' => 'nickname',
+                'sex' => '1',
+                'language' => 'language',
+                'city' => 'city',
+                'province' => 'province',
+                'country' => 'country',
+                'headimgurl' => 'headimgurl',
+                'privilege' => ['privilege1', 'privilege2'],
+            ]));
+
+        $account->fromArray([
+            'applicationId' => 'x',
+            'applicationSecret' => 'y',
+            'authScope' => 'snsapi_userinfo',
+        ]);
+
+        $account->expects($this->once())
+            ->method('findBy')
+            ->willReturn($account);
+
+        $ret = Tester::request(['code' => 'test-code', 'url' => 'https://test.com'])->post('/m-api/wechat-oa/login');
+        $this->assertRetSuc($ret);
+        $this->assertArrayHasKey('token', $ret);
+
+        $oaUser = WechatOaUserModel::findBy('openId', 'test-openid');
+        $this->assertSame([
+            'nickName' => 'nickname',
+            'sex' => 1,
+            'language' => 'language',
+            'city' => 'city',
+            'province' => 'province',
+            'country' => 'country',
+            'privilege' => ['privilege1', 'privilege2'],
+            'headImgUrl' => 'headimgurl',
+        ], $oaUser->toArray(['nickName', 'sex', 'language', 'city', 'province', 'country', 'privilege', 'headImgUrl']));
     }
 }
