@@ -111,4 +111,47 @@ class IndexTest extends BaseTestCase
         $this->assertSame('很抱歉，微信授权失败，请返回再试。(error)', $ret['message']);
         $this->assertSame('https://open.weixin.qq.com/connect/oauth2/authorize?appid=x&redirect_uri=https%3A%2F%2Ftest.com%3Fretry%3D1&response_type=code&scope=snsapi_base#wechat_redirect', $ret['retryUrl']);
     }
+
+    public function testPostRetryLimit()
+    {
+        $wechatApi = $this->getServiceMock(WechatApi::class, [
+            'getOAuth2AccessTokenByAuth',
+        ]);
+
+        $account = $this->getModelServiceMock(WechatOaAccountModel::class, [
+            'findBy',
+            'getApi',
+        ]);
+
+        $account->setOption('table', 'wechat_oa_accounts');
+
+        $account->expects($this->once())
+            ->method('getApi')
+            ->willReturn($wechatApi);
+
+        $wechatApi->expects($this->once())
+            ->method('getOAuth2AccessTokenByAuth')
+            ->with([
+                'code' => 'test-code',
+            ])
+            ->willReturn(err('error', 1));
+
+        $account->fromArray([
+            'applicationId' => 'x',
+            'applicationSecret' => 'y',
+        ]);
+
+        $account->expects($this->once())
+            ->method('findBy')
+            ->willReturn($account);
+
+        $ret = Tester::request([
+            'code' => 'test-code',
+            'url' => 'https://test.com?retry=3',
+        ])->post('/m-api/wechat-oa/login');
+        $this->assertRetErr($ret);
+
+        $this->assertSame('很抱歉，微信授权失败，请返回再试。(error)', $ret['message']);
+        $this->assertNull($ret['retryUrl']);
+    }
 }
