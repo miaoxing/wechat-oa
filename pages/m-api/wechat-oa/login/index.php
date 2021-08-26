@@ -41,7 +41,7 @@ class extends BaseController {
 
         // 1. code 换取 OpenID
         $api = $account->getApi();
-        $ret = $api->getOAuth2AccessTokenByAuth(['code' => $req['code']]);
+        $ret = $api->getOAuth2AccessToken(['code' => $req['code']]);
         if (!$ret->isSuc()) {
             $ret->setMessage(sprintf('很抱歉，微信授权失败，请返回再试。(%s)', $ret['message']));
             $ret->set('retryUrl', $this->getRetryUrl($account));
@@ -55,7 +55,7 @@ class extends BaseController {
         }
 
         if ($ret['scope'] === 'snsapi_userinfo') {
-            $ret = $api->getSnsUserInfo($ret['openid'], $ret['access_token']);
+            $ret = $api->getSnsUserInfo(['access_token' => $ret['access_token'], 'openid' => $ret['openid']]);
             if ($ret->isSuc()) {
                 $oaUser->nickName = $ret['nickname'];
                 $oaUser->sex = $ret['sex'];
