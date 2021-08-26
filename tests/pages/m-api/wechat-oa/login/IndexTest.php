@@ -35,7 +35,7 @@ class IndexTest extends BaseTestCase
     public function testPost()
     {
         $wechatApi = $this->getServiceMock(WechatApi::class, [
-            'getOAuth2AccessTokenByAuth',
+            'getOAuth2AccessToken',
         ]);
 
         $account = $this->getModelServiceMock(WechatOaAccountModel::class, [
@@ -50,7 +50,7 @@ class IndexTest extends BaseTestCase
             ->willReturn($wechatApi);
 
         $wechatApi->expects($this->once())
-            ->method('getOAuth2AccessTokenByAuth')
+            ->method('getOAuth2AccessToken')
             ->with([
                 'code' => 'test-code',
             ])
@@ -77,7 +77,7 @@ class IndexTest extends BaseTestCase
     public function testPostWechatFail()
     {
         $wechatApi = $this->getServiceMock(WechatApi::class, [
-            'getOAuth2AccessTokenByAuth',
+            'getOAuth2AccessToken',
         ]);
 
         $account = $this->getModelServiceMock(WechatOaAccountModel::class, [
@@ -92,7 +92,7 @@ class IndexTest extends BaseTestCase
             ->willReturn($wechatApi);
 
         $wechatApi->expects($this->once())
-            ->method('getOAuth2AccessTokenByAuth')
+            ->method('getOAuth2AccessToken')
             ->with([
                 'code' => 'test-code',
             ])
@@ -118,7 +118,7 @@ class IndexTest extends BaseTestCase
     public function testPostRetryLimit()
     {
         $wechatApi = $this->getServiceMock(WechatApi::class, [
-            'getOAuth2AccessTokenByAuth',
+            'getOAuth2AccessToken',
         ]);
 
         $account = $this->getModelServiceMock(WechatOaAccountModel::class, [
@@ -133,7 +133,7 @@ class IndexTest extends BaseTestCase
             ->willReturn($wechatApi);
 
         $wechatApi->expects($this->once())
-            ->method('getOAuth2AccessTokenByAuth')
+            ->method('getOAuth2AccessToken')
             ->with([
                 'code' => 'test-code',
             ])
@@ -160,10 +160,10 @@ class IndexTest extends BaseTestCase
 
     public function testPostCreateUser()
     {
-        $wechatApi = $this->getServiceMock(WechatApi::class, [
-            'getOAuth2AccessTokenByAuth',
-            'getSnsUserInfo',
-        ]);
+        $wechatApi = $this->getMockBuilder(WechatApi::class)
+            ->onlyMethods(['getOAuth2AccessToken'])
+            ->addMethods(['getSnsUserInfo'])
+            ->getMock();
 
         $account = $this->getModelServiceMock(WechatOaAccountModel::class, [
             'findBy',
@@ -177,7 +177,7 @@ class IndexTest extends BaseTestCase
             ->willReturn($wechatApi);
 
         $wechatApi->expects($this->once())
-            ->method('getOAuth2AccessTokenByAuth')
+            ->method('getOAuth2AccessToken')
             ->with([
                 'code' => 'test-code',
             ])
