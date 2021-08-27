@@ -41,7 +41,7 @@ class extends BaseController {
 
         // 1. code 换取 OpenID
         $api = $account->getApi();
-        $ret = $api->getOAuth2AccessToken(['code' => $req['code']]);
+        $ret = $api->getSnsOAuth2AccessToken(['code' => $req['code']]);
         if (!$ret->isSuc()) {
             $ret->setMessage(sprintf('很抱歉，微信授权失败，请返回再试。(%s)', $ret['message']));
             $ret->set('retryUrl', $this->getRetryUrl($account));
