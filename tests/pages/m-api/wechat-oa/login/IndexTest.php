@@ -34,9 +34,9 @@ class IndexTest extends BaseTestCase
 
     public function testPost()
     {
-        $wechatApi = $this->getServiceMock(WechatApi::class, [
-            'getSnsOAuth2AccessToken',
-        ]);
+        $wechatApi = $this->getMockBuilder(WechatApi::class)
+            ->addMethods(['getSnsOAuth2AccessToken'])
+            ->getMock();
 
         $account = $this->getModelServiceMock(WechatOaAccountModel::class, [
             'findBy',
@@ -76,9 +76,9 @@ class IndexTest extends BaseTestCase
 
     public function testPostWechatFail()
     {
-        $wechatApi = $this->getServiceMock(WechatApi::class, [
-            'getSnsOAuth2AccessToken',
-        ]);
+        $wechatApi = $this->getMockBuilder(WechatApi::class)
+            ->addMethods(['getSnsOAuth2AccessToken'])
+            ->getMock();
 
         $account = $this->getModelServiceMock(WechatOaAccountModel::class, [
             'findBy',
@@ -117,9 +117,9 @@ class IndexTest extends BaseTestCase
 
     public function testPostRetryLimit()
     {
-        $wechatApi = $this->getServiceMock(WechatApi::class, [
-            'getSnsOAuth2AccessToken',
-        ]);
+        $wechatApi = $this->getMockBuilder(WechatApi::class)
+            ->addMethods(['getSnsOAuth2AccessToken'])
+            ->getMock();
 
         $account = $this->getModelServiceMock(WechatOaAccountModel::class, [
             'findBy',
@@ -161,8 +161,7 @@ class IndexTest extends BaseTestCase
     public function testPostCreateUser()
     {
         $wechatApi = $this->getMockBuilder(WechatApi::class)
-            ->onlyMethods(['getSnsOAuth2AccessToken'])
-            ->addMethods(['getSnsUserInfo'])
+            ->addMethods(['getSnsOAuth2AccessToken', 'getSnsUserInfo'])
             ->getMock();
 
         $account = $this->getModelServiceMock(WechatOaAccountModel::class, [
