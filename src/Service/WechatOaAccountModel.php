@@ -5,6 +5,7 @@ namespace Miaoxing\WechatOa\Service;
 use Miaoxing\Plugin\BaseModel;
 use Miaoxing\Plugin\Model\HasAppIdTrait;
 use Miaoxing\Plugin\Model\ModelTrait;
+use Miaoxing\Plugin\Model\SnowflakeTrait;
 use Miaoxing\Wechat\Service\WechatApi;
 use Miaoxing\WechatOa\Metadata\WechatOaAccountTrait;
 
@@ -15,6 +16,7 @@ class WechatOaAccountModel extends BaseModel
 {
     use HasAppIdTrait;
     use ModelTrait;
+    use SnowflakeTrait;
     use WechatOaAccountTrait;
 
     public const TYPE_SUBSCRIPTION = 1;
