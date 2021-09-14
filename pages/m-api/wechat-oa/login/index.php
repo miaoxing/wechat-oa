@@ -47,6 +47,7 @@ class extends BaseController {
             $ret->set('retryUrl', $this->getRetryUrl($account));
             return $ret;
         }
+        $this->logIfRetry();
 
         // 2. 创建用户并登录
         $oaUser = WechatOaUserModel::findOrInitBy(['openId' => $ret['openid']]);
@@ -97,7 +98,7 @@ class extends BaseController {
     protected function getRetryUrl(WechatOaAccountModel $account): ?string
     {
         $retry = 1;
-        $url = $this->req['url'] ?: $this->req->getReferer() ?: $this->req->getUrl();
+        $url = $this->getUrl();
         $this->logger->debug('Wechat OAuth retry from url', $url);
 
         $components = parse_url($url);
@@ -130,5 +131,18 @@ class extends BaseController {
         $this->logger->debug('Wechat OAuth retry built url', $url);
 
         return $account->getOauth2Url($url);
+    }
+
+    protected function logIfRetry()
+    {
+        $url = $this->getUrl();
+        if (isset(parse_url($url)['query']['retry'])) {
+            $this->logger->info('微信获取 Code 重试成功', ['url' => $url]);
+        }
+    }
+
+    protected function getUrl()
+    {
+        return $this->req['url'] ?: $this->req->getReferer() ?: $this->req->getUrl();
     }
 };
