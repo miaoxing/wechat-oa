@@ -27,30 +27,32 @@ class WechatOaAccountModelTest extends BaseTestCase
 
     public static function providerForGetOauth2Url(): array
     {
+        $prefix = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=appId&redirect_uri=';
+
         return [
             [
                 'https://test.com',
                 'snsapi_base',
                 '',
-                'https://open.weixin.qq.com/connect/oauth2/authorize?appid=appId&redirect_uri=https%3A%2F%2Ftest.com&response_type=code&scope=snsapi_base#wechat_redirect',
+                $prefix . 'https%3A%2F%2Ftest.com&response_type=code&scope=snsapi_base#wechat_redirect',
             ],
             [
                 'https://test.com',
                 'snsapi_userinfo',
                 '',
-                'https://open.weixin.qq.com/connect/oauth2/authorize?appid=appId&redirect_uri=https%3A%2F%2Ftest.com&response_type=code&scope=snsapi_userinfo#wechat_redirect',
+                $prefix . 'https%3A%2F%2Ftest.com&response_type=code&scope=snsapi_userinfo#wechat_redirect',
             ],
             [
                 'https://t.com',
                 '',
                 '',
-                'https://open.weixin.qq.com/connect/oauth2/authorize?appid=appId&redirect_uri=https%3A%2F%2Ft.com&response_type=code&scope=snsapi_userinfo#wechat_redirect',
+                $prefix . 'https%3A%2F%2Ft.com&response_type=code&scope=snsapi_userinfo#wechat_redirect',
             ],
             [
                 'https://t.com',
                 '',
                 'state',
-                'https://open.weixin.qq.com/connect/oauth2/authorize?appid=appId&redirect_uri=https%3A%2F%2Ft.com&response_type=code&scope=snsapi_userinfo&state=state#wechat_redirect',
+                $prefix . 'https%3A%2F%2Ft.com&response_type=code&scope=snsapi_userinfo&state=state#wechat_redirect',
             ],
         ];
     }

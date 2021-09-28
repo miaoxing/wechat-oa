@@ -28,8 +28,10 @@ class IndexTest extends BaseTestCase
         $ret = Tester::request(['url' => 'https://test.com'])->get('/m-api/wechat-oa/login');
 
         $this->assertRetSuc($ret);
-        $this->assertSame('https://open.weixin.qq.com/connect/oauth2/authorize?appid=x&redirect_uri=https%3A%2F%2Ftest.com&response_type=code&scope=snsapi_base#wechat_redirect',
-            $ret['url']);
+        $this->assertSame(
+            $this->getWechatUrl('x&redirect_uri=https%3A%2F%2Ftest.com'),
+            $ret['url']
+        );
     }
 
     public function testPost()
@@ -111,8 +113,10 @@ class IndexTest extends BaseTestCase
         $this->assertRetErr($ret);
 
         $this->assertSame('很抱歉，微信授权失败，请返回再试。(error)', $ret['message']);
-        $this->assertSame('https://open.weixin.qq.com/connect/oauth2/authorize?appid=x&redirect_uri=https%3A%2F%2Ftest.com%3Fretry%3D1&response_type=code&scope=snsapi_base#wechat_redirect',
-            $ret['retryUrl']);
+        $this->assertSame(
+            $this->getWechatUrl('x&redirect_uri=https%3A%2F%2Ftest.com%3Fretry%3D1'),
+            $ret['retryUrl']
+        );
     }
 
     public function testPostRetryLimit()
@@ -225,5 +229,12 @@ class IndexTest extends BaseTestCase
             'privilege' => ['privilege1', 'privilege2'],
             'headImgUrl' => 'headimgurl',
         ], $oaUser->toArray(['nickName', 'sex', 'language', 'city', 'province', 'country', 'privilege', 'headImgUrl']));
+    }
+
+    protected function getWechatUrl(string $url): string
+    {
+        return 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='
+            . $url
+            . '&response_type=code&scope=snsapi_base#wechat_redirect';
     }
 }
