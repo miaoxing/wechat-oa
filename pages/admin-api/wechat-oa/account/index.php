@@ -3,7 +3,7 @@
 use Miaoxing\Plugin\BaseController;
 use Miaoxing\WechatOa\Service\WechatOaAccountModel;
 
-return new class extends BaseController {
+return new class () extends BaseController {
     public function get()
     {
         return $this->getAccount()->toRet();

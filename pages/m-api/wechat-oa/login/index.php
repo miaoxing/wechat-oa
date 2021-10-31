@@ -7,12 +7,11 @@ use Miaoxing\WechatOa\Service\WechatOaAccountModel;
 use Miaoxing\WechatOa\Service\WechatOaUserModel;
 use Wei\Ret;
 
-return new
-/**
+return new /**
  * @mixin UrlMixin
  * @mixin LoggerMixin
  */
-class extends BaseController {
+class () extends BaseController {
     protected const MAX_RETRY = 3;
     protected $controllerAuth = false;
 
@@ -55,7 +54,7 @@ class extends BaseController {
             $oaUser->unionId = $ret['unionid'];
         }
 
-        if ($ret['scope'] === 'snsapi_userinfo') {
+        if ('snsapi_userinfo' === $ret['scope']) {
             $ret = $api->getSnsUserInfo(['access_token' => $ret['access_token'], 'openid' => $ret['openid']]);
             if ($ret->isSuc()) {
                 $oaUser->nickName = $ret['nickname'];
