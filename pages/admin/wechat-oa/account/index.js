@@ -1,12 +1,12 @@
 import {Page, PageActions} from '@mxjs/a-page';
 import {Form, FormAction, FormItem} from '@mxjs/a-form';
 import {Radio, Space} from 'antd';
-import {Box} from '@fower/react';
+import {Box} from '@mxjs/box';
 
 const Index = () => {
   return (
     <Page>
-      <PageActions mb={12}>
+      <PageActions mb12>
         公众号设置
       </PageActions>
       <Form method="patch" labelCol={{span: 8}} wrapperCol={{span: 8}}>
