@@ -7,7 +7,7 @@
   "author": "twinh <twinhuang@qq.com>",
   "license": "MIT",
   "dependencies": {
-    "antd": "^4.15.2",
+    "antd": "~4.17.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "@mxjs/a-page": "^0.3.0",
