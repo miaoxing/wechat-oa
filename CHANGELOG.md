@@ -1,3 +1,26 @@
+## [0.1.2](https://github.com/miaoxing/wechat-oa/compare/v0.1.1...v0.1.2) (2022-01-12)
+
+
+### Features
+
+* 更新 `antd` 到 `~4.17.4` ([5cae688](https://github.com/miaoxing/wechat-oa/commit/5cae688379f84461ea97db4c508fc3a734126448))
+
+
+
+
+
+### Dependencies
+
+* **@mxjs/a-page:** upgrade from `0.3.0` to `0.3.1`
+* **@mxjs/a-form:** upgrade from `0.3.0` to `0.3.1`
+* **miaoxing:** upgrade from `0.3.0` to `0.4.0`
+* **@mxjs/app:** upgrade from `0.3.3` to `0.4.0`
+* **@miaoxing/dev:** upgrade from `8.0.0` to `8.0.1`
+* **@mxjs/test:** upgrade from `0.2.0` to `0.2.1`
+* **@miaoxing/plugin:** upgrade from `0.5.0` to `0.6.0`
+* **@miaoxing/user:** upgrade from `0.3.0` to `0.4.0`
+* **@miaoxing/wechat:** upgrade from `0.1.0` to `0.1.1`
+
 ## [0.1.1](https://github.com/miaoxing/wechat-oa/compare/v0.1.0...v0.1.1) (2021-10-28)
 
 
