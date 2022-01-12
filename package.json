@@ -6,6 +6,9 @@
   "repository": "git@github.com:miaoxing/wechat-oa.git",
   "author": "twinh <twinhuang@qq.com>",
   "license": "MIT",
+  "workspaces": [
+    "plugins/*"
+  ],
   "dependencies": {
     "antd": "~4.17.4",
     "react": "^17.0.2",
