@@ -1,3 +1,15 @@
+## [0.1.4](https://github.com/miaoxing/wechat-oa/compare/v0.1.3...v0.1.4) (2022-02-28)
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/plugin:** upgrade from `0.7.0` to `0.7.1`
+* **@miaoxing/user:** upgrade from `0.4.1` to `0.4.2`
+* **@miaoxing/wechat:** upgrade from `0.1.2` to `0.1.3`
+
 ## [0.1.3](https://github.com/miaoxing/wechat-oa/compare/v0.1.2...v0.1.3) (2022-02-05)
 
 
