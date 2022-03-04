@@ -13,7 +13,7 @@ class V20210811102856CreateWechatOaUsersTable extends BaseMigration
     {
         $this->schema->table('wechat_oa_users')
             ->bigId()
-            ->uInt('app_id')->comment('应用编号')
+            ->uBigInt('app_id')->comment('应用编号')
             ->uBigInt('user_id')->comment('用户编号')
             ->string('open_id', 32)->comment('微信用户 OpenID')
             ->string('union_id', 32)->comment('微信用户 UnionID')
