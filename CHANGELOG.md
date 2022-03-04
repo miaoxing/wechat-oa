@@ -1,3 +1,29 @@
+# [0.2.0](https://github.com/miaoxing/wechat-oa/compare/v0.1.4...v0.2.0) (2022-03-04)
+
+
+### Features
+
+* 数据表 `app_id` 字段由 `int` 升级到 `bigint` ([a3cd9d9](https://github.com/miaoxing/wechat-oa/commit/a3cd9d92cdbed11a3232326c833ce62003f8fc6a))
+
+
+### BREAKING CHANGES
+
+* 数据表 `app_id` 字段由 `int` 升级到 `bigint`
+
+
+
+
+
+### Dependencies
+
+* **@mxjs/a-page:** upgrade from `0.3.2` to `0.3.3`
+* **@mxjs/a-form:** upgrade from `0.3.2` to `0.3.3`
+* **@mxjs/app:** upgrade from `0.4.1` to `0.4.2`
+* **@mxjs/test:** upgrade from `0.2.2` to `0.2.3`
+* **@miaoxing/plugin:** upgrade from `0.7.1` to `0.8.0`
+* **@miaoxing/user:** upgrade from `0.4.2` to `0.4.3`
+* **@miaoxing/wechat:** upgrade from `0.1.3` to `0.1.4`
+
 ## [0.1.4](https://github.com/miaoxing/wechat-oa/compare/v0.1.3...v0.1.4) (2022-02-28)
 
 
