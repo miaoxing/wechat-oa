@@ -1,6 +1,6 @@
 {
   "name": "@miaoxing/wechat-oa",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "main": "index.js",
   "repository": "git@github.com:miaoxing/wechat-oa.git",
@@ -13,15 +13,15 @@
     "antd": "~4.17.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "@mxjs/a-page": "^0.3.3",
-    "@mxjs/a-form": "^0.3.3",
+    "@mxjs/a-page": "^0.3.4",
+    "@mxjs/a-form": "^0.3.4",
     "miaoxing": "^0.4.1",
-    "@mxjs/app": "^0.4.2"
+    "@mxjs/app": "^0.4.3"
   },
   "devDependencies": {
     "@miaoxing/dev": "^8.1.0",
     "react-router": "^5.2.0",
-    "@mxjs/test": "^0.2.3",
+    "@mxjs/test": "^0.2.4",
     "@testing-library/react": "^11.2.6"
   },
   "jest": {
