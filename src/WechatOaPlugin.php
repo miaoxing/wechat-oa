@@ -2,6 +2,7 @@
 
 namespace Miaoxing\WechatOa;
 
+use Miaoxing\Admin\Service\AdminMenu;
 use Miaoxing\Plugin\BasePlugin;
 use Miaoxing\Plugin\Service\User;
 use Miaoxing\WechatOa\Service\WechatOaAccountModel;
@@ -12,13 +13,9 @@ class WechatOaPlugin extends BasePlugin
 
     protected $code = 213;
 
-    public function onAdminNavGetNavs(&$navs, &$categories, &$subCategories)
+    public function onAdminMenuGetMenus(AdminMenu $menu)
     {
-        $subCategories[] = [
-            'parentId' => 'setting',
-            'url' => 'admin/wechat-oa/account',
-            'name' => '公众号设置',
-        ];
+        $menu->child('setting')->addChild()->setLabel('公众号设置')->setUrl('admin/wechat-oa/account');
     }
 
     public function onCheckAuth()
