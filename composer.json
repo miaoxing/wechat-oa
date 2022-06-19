@@ -30,6 +30,7 @@
   "prefer-stable": true,
   "extra": {
     "require-ci": {
+      "miaoxing/admin": "miaoxing/admin as 0.7.x-dev",
       "miaoxing/dev": "miaoxing/dev as 8.x-dev",
       "miaoxing/phpstan-miaoxing": "miaoxing/phpstan-miaoxing as 0.1.x-dev",
       "miaoxing/plugin": "miaoxing/plugin as 0.8.x-dev",
