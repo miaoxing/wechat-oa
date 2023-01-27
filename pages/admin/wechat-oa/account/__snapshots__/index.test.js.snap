@@ -5,6 +5,7 @@ exports[`admin/wechat-oa/account index 1`] = `
   "calls": Array [
     Array [
       Object {
+        "loading": true,
         "method": "get",
         "url": "/admin-api/wechat-oa/account",
       },
@@ -27,6 +28,7 @@ exports[`admin/wechat-oa/account index 2`] = `
   "calls": Array [
     Array [
       Object {
+        "loading": true,
         "method": "get",
         "url": "/admin-api/wechat-oa/account",
       },
