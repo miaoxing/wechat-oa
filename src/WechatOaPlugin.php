@@ -3,6 +3,7 @@
 namespace Miaoxing\WechatOa;
 
 use Miaoxing\Admin\Service\AdminMenu;
+use Miaoxing\App\Service\PermissionMap;
 use Miaoxing\Plugin\BasePlugin;
 use Miaoxing\Plugin\Service\User;
 use Miaoxing\WechatOa\Service\WechatOaAccountModel;
@@ -16,6 +17,13 @@ class WechatOaPlugin extends BasePlugin
     public function onAdminMenuGetMenus(AdminMenu $menu)
     {
         $menu->child('setting')->addChild()->setLabel('公众号设置')->setUrl('admin/wechat-oa/account');
+    }
+
+    public function onPermissionGetMap(PermissionMap $map)
+    {
+        $map->add('admin/wechat-oa/account', [
+            'PATCH api/admin/wechat-oa/account'
+        ]);
     }
 
     public function onCheckAuth()
