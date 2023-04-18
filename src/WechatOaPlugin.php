@@ -22,7 +22,7 @@ class WechatOaPlugin extends BasePlugin
     public function onPermissionGetMap(PermissionMap $map)
     {
         $map->add('admin/wechat-oa/account', [
-            'PATCH api/admin/wechat-oa/account'
+            'PATCH api/admin/wechat-oa/account',
         ]);
     }
 
