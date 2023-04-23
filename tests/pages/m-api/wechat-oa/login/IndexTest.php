@@ -4,8 +4,8 @@ namespace MiaoxingTest\WechatOa\Pages\MApi\WechatOa\Login;
 
 use Miaoxing\Plugin\Service\Tester;
 use Miaoxing\Plugin\Test\BaseTestCase;
-use Miaoxing\Wechat\Service\WechatApi;
 use Miaoxing\WechatOa\Service\WechatOaAccountModel;
+use Miaoxing\WechatOa\Service\WechatOaApi;
 use Miaoxing\WechatOa\Service\WechatOaUserModel;
 
 class IndexTest extends BaseTestCase
@@ -36,20 +36,10 @@ class IndexTest extends BaseTestCase
 
     public function testPost()
     {
-        $wechatApi = $this->getMockBuilder(WechatApi::class)
+        $wechatApi = $this->getMockBuilder(WechatOaApi::class)
             ->addMethods(['getSnsOAuth2AccessToken'])
             ->getMock();
-
-        $account = $this->getModelServiceMock(WechatOaAccountModel::class, [
-            'findBy',
-            'getApi',
-        ]);
-
-        $account->setOption('table', 'wechat_oa_accounts');
-
-        $account->expects($this->once())
-            ->method('getApi')
-            ->willReturn($wechatApi);
+        $this->registerMockServices(WechatOaApi::class, $wechatApi);
 
         $wechatApi->expects($this->once())
             ->method('getSnsOAuth2AccessToken')
@@ -62,15 +52,6 @@ class IndexTest extends BaseTestCase
                 'unionid' => 'test-unionid',
             ]));
 
-        $account->fromArray([
-            'applicationId' => 'x',
-            'applicationSecret' => 'y',
-        ]);
-
-        $account->expects($this->once())
-            ->method('findBy')
-            ->willReturn($account);
-
         $ret = Tester::request(['code' => 'test-code', 'url' => 'https://test.com'])->post('/m-api/wechat-oa/login');
         $this->assertRetSuc($ret);
         $this->assertArrayHasKey('token', $ret);
@@ -78,20 +59,11 @@ class IndexTest extends BaseTestCase
 
     public function testPostWechatFail()
     {
-        $wechatApi = $this->getMockBuilder(WechatApi::class)
+        $wechatApi = $this->getMockBuilder(WechatOaApi::class)
             ->addMethods(['getSnsOAuth2AccessToken'])
+            ->onlyMethods(['getAccount'])
             ->getMock();
-
-        $account = $this->getModelServiceMock(WechatOaAccountModel::class, [
-            'findBy',
-            'getApi',
-        ]);
-
-        $account->setOption('table', 'wechat_oa_accounts');
-
-        $account->expects($this->once())
-            ->method('getApi')
-            ->willReturn($wechatApi);
+        $this->registerMockServices(WechatOaApi::class, $wechatApi);
 
         $wechatApi->expects($this->once())
             ->method('getSnsOAuth2AccessToken')
@@ -100,14 +72,12 @@ class IndexTest extends BaseTestCase
             ])
             ->willReturn(err('error', 1));
 
-        $account->fromArray([
-            'applicationId' => 'x',
-            'applicationSecret' => 'y',
-        ]);
-
-        $account->expects($this->once())
-            ->method('findBy')
-            ->willReturn($account);
+        $wechatApi->expects($this->once())
+            ->method('getAccount')
+            ->willReturn(WechatOaAccountModel::new([
+                'applicationId' => 'x',
+                'applicationSecret' => 'y',
+            ]));
 
         $ret = Tester::request(['code' => 'test-code', 'url' => 'https://test.com'])->post('/m-api/wechat-oa/login');
         $this->assertRetErr($ret);
@@ -121,20 +91,10 @@ class IndexTest extends BaseTestCase
 
     public function testPostRetryLimit()
     {
-        $wechatApi = $this->getMockBuilder(WechatApi::class)
+        $wechatApi = $this->getMockBuilder(WechatOaApi::class)
             ->addMethods(['getSnsOAuth2AccessToken'])
             ->getMock();
-
-        $account = $this->getModelServiceMock(WechatOaAccountModel::class, [
-            'findBy',
-            'getApi',
-        ]);
-
-        $account->setOption('table', 'wechat_oa_accounts');
-
-        $account->expects($this->once())
-            ->method('getApi')
-            ->willReturn($wechatApi);
+        $this->registerMockServices(WechatOaApi::class, $wechatApi);
 
         $wechatApi->expects($this->once())
             ->method('getSnsOAuth2AccessToken')
@@ -142,15 +102,6 @@ class IndexTest extends BaseTestCase
                 'code' => 'test-code',
             ])
             ->willReturn(err('error', 1));
-
-        $account->fromArray([
-            'applicationId' => 'x',
-            'applicationSecret' => 'y',
-        ]);
-
-        $account->expects($this->once())
-            ->method('findBy')
-            ->willReturn($account);
 
         $ret = Tester::request([
             'code' => 'test-code',
@@ -164,20 +115,10 @@ class IndexTest extends BaseTestCase
 
     public function testPostCreateUser()
     {
-        $wechatApi = $this->getMockBuilder(WechatApi::class)
+        $wechatApi = $this->getMockBuilder(WechatOaApi::class)
             ->addMethods(['getSnsOAuth2AccessToken', 'getSnsUserInfo'])
             ->getMock();
-
-        $account = $this->getModelServiceMock(WechatOaAccountModel::class, [
-            'findBy',
-            'getApi',
-        ]);
-
-        $account->setOption('table', 'wechat_oa_accounts');
-
-        $account->expects($this->once())
-            ->method('getApi')
-            ->willReturn($wechatApi);
+        $this->registerMockServices(WechatOaApi::class, $wechatApi);
 
         $wechatApi->expects($this->once())
             ->method('getSnsOAuth2AccessToken')
@@ -203,16 +144,6 @@ class IndexTest extends BaseTestCase
                 'headimgurl' => 'headimgurl',
                 'privilege' => ['privilege1', 'privilege2'],
             ]));
-
-        $account->fromArray([
-            'applicationId' => 'x',
-            'applicationSecret' => 'y',
-            'authScope' => 'snsapi_userinfo',
-        ]);
-
-        $account->expects($this->once())
-            ->method('findBy')
-            ->willReturn($account);
 
         $ret = Tester::request(['code' => 'test-code', 'url' => 'https://test.com'])->post('/m-api/wechat-oa/login');
         $this->assertRetSuc($ret);

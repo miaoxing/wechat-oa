@@ -4,6 +4,7 @@ use Miaoxing\Plugin\BaseController;
 use Miaoxing\Plugin\Service\User;
 use Miaoxing\User\Service\UserModel;
 use Miaoxing\WechatOa\Service\WechatOaAccountModel;
+use Miaoxing\WechatOa\Service\WechatOaApi;
 use Miaoxing\WechatOa\Service\WechatOaUserModel;
 use Wei\Ret;
 
@@ -32,18 +33,12 @@ class () extends BaseController {
 
     public function post($req)
     {
-        $ret = $this->getAccount();
-        if ($ret->isErr()) {
-            return $ret;
-        }
-        $account = $ret['data'];
-
         // 1. code 换取 OpenID
-        $api = $account->getApi();
+        $api = WechatOaApi::instance();
         $ret = $api->getSnsOAuth2AccessToken(['code' => $req['code']]);
         if (!$ret->isSuc()) {
             $ret->setMessage(sprintf('很抱歉，微信授权失败，请返回再试。(%s)', $ret['message']));
-            $ret->set('retryUrl', $this->getRetryUrl($account));
+            $ret->set('retryUrl', $this->getRetryUrl($api->getAccount()));
             return $ret;
         }
         $this->logIfRetry();
