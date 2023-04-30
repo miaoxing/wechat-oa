@@ -1,3 +1,21 @@
+## [0.2.18](https://github.com/miaoxing/wechat-oa/compare/v0.2.17...v0.2.18) (2023-04-30)
+
+
+### Features
+
+* **wechat-oa:** 增加 `WechatOaApi` ([ff5de57](https://github.com/miaoxing/wechat-oa/commit/ff5de572142dca2e4947d9f91f5678a172acbc9c))
+
+
+
+
+
+### Dependencies
+
+* **@mxjs/a-form:** upgrade from `1.2.2` to `1.3.0`
+* **@miaoxing/plugin:** upgrade from `0.11.1` to `0.11.2`
+* **@miaoxing/user:** upgrade from `0.5.4` to `0.5.5`
+* **@miaoxing/wechat:** upgrade from `0.1.18` to `0.1.19`
+
 ## [0.2.17](https://github.com/miaoxing/wechat-oa/compare/v0.2.16...v0.2.17) (2023-04-18)
 
 
