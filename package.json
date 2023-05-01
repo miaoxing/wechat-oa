@@ -10,7 +10,7 @@
     "plugins/*"
   ],
   "dependencies": {
-    "antd": "~4.24.7",
+    "antd": "~5.1.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "@mxjs/a-page": "^2.1.1",
