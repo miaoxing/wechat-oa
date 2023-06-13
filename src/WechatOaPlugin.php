@@ -28,7 +28,7 @@ class WechatOaPlugin extends BasePlugin
 
     public function onCheckAuth()
     {
-        if (0 !== strpos($this->req->getRouterPathInfo(), '/m-api/')) {
+        if (0 !== strpos($this->req->getRouterPathInfo(), '/api/')) {
             return;
         }
 

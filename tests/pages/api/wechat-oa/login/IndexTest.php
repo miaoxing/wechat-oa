@@ -1,6 +1,6 @@
 <?php
 
-namespace MiaoxingTest\WechatOa\Pages\MApi\WechatOa\Login;
+namespace MiaoxingTest\WechatOa\Pages\Api\WechatOa\Login;
 
 use Miaoxing\Plugin\Service\Tester;
 use Miaoxing\Plugin\Test\BaseTestCase;
@@ -25,7 +25,7 @@ class IndexTest extends BaseTestCase
             ->method('findBy')
             ->willReturn($account);
 
-        $ret = Tester::request(['url' => 'https://test.com'])->get('/m-api/wechat-oa/login');
+        $ret = Tester::request(['url' => 'https://test.com'])->get('/api/wechat-oa/login');
 
         $this->assertRetSuc($ret);
         $this->assertSame(
@@ -52,7 +52,7 @@ class IndexTest extends BaseTestCase
                 'unionid' => 'test-unionid',
             ]));
 
-        $ret = Tester::request(['code' => 'test-code', 'url' => 'https://test.com'])->post('/m-api/wechat-oa/login');
+        $ret = Tester::request(['code' => 'test-code', 'url' => 'https://test.com'])->post('/api/wechat-oa/login');
         $this->assertRetSuc($ret);
         $this->assertArrayHasKey('token', $ret);
     }
@@ -79,7 +79,7 @@ class IndexTest extends BaseTestCase
                 'applicationSecret' => 'y',
             ]));
 
-        $ret = Tester::request(['code' => 'test-code', 'url' => 'https://test.com'])->post('/m-api/wechat-oa/login');
+        $ret = Tester::request(['code' => 'test-code', 'url' => 'https://test.com'])->post('/api/wechat-oa/login');
         $this->assertRetErr($ret);
 
         $this->assertSame('很抱歉，微信授权失败，请返回再试。(error)', $ret['message']);
@@ -106,7 +106,7 @@ class IndexTest extends BaseTestCase
         $ret = Tester::request([
             'code' => 'test-code',
             'url' => 'https://test.com?retry=3',
-        ])->post('/m-api/wechat-oa/login');
+        ])->post('/api/wechat-oa/login');
         $this->assertRetErr($ret);
 
         $this->assertSame('很抱歉，微信授权失败，请返回再试。(error)', $ret['message']);
@@ -145,7 +145,7 @@ class IndexTest extends BaseTestCase
                 'privilege' => ['privilege1', 'privilege2'],
             ]));
 
-        $ret = Tester::request(['code' => 'test-code', 'url' => 'https://test.com'])->post('/m-api/wechat-oa/login');
+        $ret = Tester::request(['code' => 'test-code', 'url' => 'https://test.com'])->post('/api/wechat-oa/login');
         $this->assertRetSuc($ret);
         $this->assertArrayHasKey('token', $ret);
 

@@ -7,7 +7,7 @@ exports[`admin/wechat-oa/account index 1`] = `
       Object {
         "loading": true,
         "method": "get",
-        "url": "/admin-api/wechat-oa/account",
+        "url": "/api/admin/wechat-oa/account",
       },
     ],
   ],
@@ -30,7 +30,7 @@ exports[`admin/wechat-oa/account index 2`] = `
       Object {
         "loading": true,
         "method": "get",
-        "url": "/admin-api/wechat-oa/account",
+        "url": "/api/admin/wechat-oa/account",
       },
     ],
     Array [
@@ -43,7 +43,7 @@ exports[`admin/wechat-oa/account index 2`] = `
         },
         "loading": true,
         "method": "patch",
-        "url": "/admin-api/wechat-oa/account",
+        "url": "/api/admin/wechat-oa/account",
       },
     ],
   ],
