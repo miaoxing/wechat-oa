@@ -1,3 +1,19 @@
+## [0.2.20](https://github.com/miaoxing/wechat-oa/compare/v0.2.19...v0.2.20) (2023-06-30)
+
+
+
+
+
+### Dependencies
+
+* **@mxjs/a-page:** upgrade from `2.1.2` to `2.1.3`
+* **@mxjs/a-form:** upgrade from `1.4.0` to `1.4.1`
+* **@mxjs/app:** upgrade from `0.5.5` to `0.6.0`
+* **@mxjs/test:** upgrade from `1.0.4` to `1.0.5`
+* **@miaoxing/plugin:** upgrade from `0.12.0` to `0.12.1`
+* **@miaoxing/user:** upgrade from `0.5.6` to `0.5.7`
+* **@miaoxing/wechat:** upgrade from `0.1.20` to `0.1.21`
+
 ## [0.2.19](https://github.com/miaoxing/wechat-oa/compare/v0.2.18...v0.2.19) (2023-05-31)
 
 
