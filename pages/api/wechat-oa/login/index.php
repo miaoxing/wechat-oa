@@ -1,6 +1,6 @@
 <?php
 
-use Miaoxing\Plugin\BaseController;
+use Miaoxing\Plugin\BasePage;
 use Miaoxing\Plugin\Service\User;
 use Miaoxing\User\Service\UserModel;
 use Miaoxing\WechatOa\Service\WechatOaAccountModel;
@@ -12,7 +12,7 @@ return new /**
  * @mixin UrlMixin
  * @mixin LoggerMixin
  */
-class () extends BaseController {
+class () extends BasePage {
     protected const MAX_RETRY = 3;
     protected $controllerAuth = false;
 

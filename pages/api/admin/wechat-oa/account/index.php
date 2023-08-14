@@ -1,9 +1,9 @@
 <?php
 
-use Miaoxing\Plugin\BaseController;
+use Miaoxing\Plugin\BasePage;
 use Miaoxing\WechatOa\Service\WechatOaAccountModel;
 
-return new class () extends BaseController {
+return new class () extends BasePage {
     public function get()
     {
         return $this->getAccount()->toRet();
