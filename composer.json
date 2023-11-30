@@ -19,12 +19,12 @@
     }
   },
   "require": {
-    "miaoxing/plugin": "^0.13.2",
-    "miaoxing/user": "^0.5.11",
-    "miaoxing/wechat": "^0.1.25"
+    "miaoxing/plugin": "^0.14.0",
+    "miaoxing/user": "^0.5.12",
+    "miaoxing/wechat": "^0.1.26"
   },
   "require-dev": {
-    "miaoxing/dev": "^8.2.3"
+    "miaoxing/dev": "^8.2.4"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
