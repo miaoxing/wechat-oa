@@ -110,7 +110,7 @@ class () extends BasePage {
             $components['query'] = '';
         }
 
-        if ($retry > static::MAX_RETRY) {
+        if ($retry > self::MAX_RETRY) {
             // 超过三次，不再返回
             return null;
         }
