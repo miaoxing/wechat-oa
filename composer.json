@@ -20,8 +20,8 @@
   },
   "require": {
     "miaoxing/plugin": "^0.14.2",
-    "miaoxing/user": "^0.5.14",
-    "miaoxing/wechat": "^0.1.28"
+    "miaoxing/user": "^0.5.15",
+    "miaoxing/wechat": "^0.1.29"
   },
   "require-dev": {
     "miaoxing/dev": "^9.1.0"
