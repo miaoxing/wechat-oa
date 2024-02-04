@@ -53,7 +53,7 @@ class WechatOaAccountModel extends BaseModel
      * @param string|null $state
      * @return string
      */
-    public function getOauth2Url(string $url = null, string $scope = null, string $state = null): string
+    public function getOauth2Url(?string $url = null, ?string $scope = null, ?string $state = null): string
     {
         $url || $url = $this->req->getUrl();
         $scope || $scope = $this->authScope ?: 'snsapi_base';
