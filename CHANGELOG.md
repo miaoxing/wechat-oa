@@ -1,3 +1,27 @@
+## [0.2.29](https://github.com/miaoxing/wechat-oa/compare/v0.2.28...v0.2.29) (2024-02-20)
+
+
+### Bug Fixes
+
+* **wechat-oa:** 解决 antd5 radio 变为居中后，label 多行文字不对齐的问题 ([1abf591](https://github.com/miaoxing/wechat-oa/commit/1abf59150c412d86a082d0d6934b72cd3cabc783))
+
+
+### Features
+
+* 更新 antd, antd icons 版本 ([bee80ea](https://github.com/miaoxing/wechat-oa/commit/bee80ea9078ee0a2a91595f0deea982bd3a0e7b6))
+
+
+
+
+
+### Dependencies
+
+* **@mxjs/a-page:** upgrade from `2.3.0` to `2.4.0`
+* **@mxjs/a-form:** upgrade from `2.1.0` to `2.2.0`
+* **@miaoxing/plugin:** upgrade from `0.14.2` to `0.14.3`
+* **@miaoxing/user:** upgrade from `0.5.15` to `0.5.16`
+* **@miaoxing/wechat:** upgrade from `0.1.29` to `0.1.30`
+
 ## [0.2.28](https://github.com/miaoxing/wechat-oa/compare/v0.2.27...v0.2.28) (2024-01-31)
 
 
