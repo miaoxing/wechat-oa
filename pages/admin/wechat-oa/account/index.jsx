@@ -7,7 +7,7 @@ const {Text} = Typography;
 const Index = () => {
   return (
     <Page>
-      <PageActions mb12>
+      <PageActions className="mb-12">
         公众号设置
       </PageActions>
       <Form method="patch" labelCol={{span: 8}} wrapperCol={{span: 8}}>
