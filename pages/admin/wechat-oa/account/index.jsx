@@ -1,5 +1,5 @@
 import { Page, PageActions } from '@mxjs/a-page';
-import { Form, FormAction, FormItem } from '@mxjs/a-form';
+import { Form, FormActions, FormItem } from '@mxjs/a-form';
 import { Radio, Space, Typography } from 'antd';
 import { Section } from '@mxjs/a-section';
 
@@ -34,7 +34,7 @@ const Index = () => {
             </Radio.Group>
           </FormItem>
         </Section>
-        <FormAction list={false}/>
+        <FormActions list={false}/>
       </Form>
     </Page>
   );
