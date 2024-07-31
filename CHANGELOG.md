@@ -1,3 +1,27 @@
+## [0.3.3](https://github.com/miaoxing/wechat-oa/compare/v0.3.2...v0.3.3) (2024-07-31)
+
+
+### Features
+
+* **u:** 调整页面内容为卡片视图 ([f195f31](https://github.com/miaoxing/wechat-oa/commit/f195f31893f7a2169b55def466e32068eb6ca5a0))
+
+
+
+
+
+### Dependencies
+
+* **@mxjs/a-page:** upgrade from `3.0.1` to `4.0.0`
+* **@mxjs/a-form:** upgrade from `3.0.2` to `4.0.0`
+* **@mxjs/a-section:** upgrade from `1.0.0` to `1.1.0`
+* **miaoxing:** upgrade from `0.4.15` to `0.4.16`
+* **@mxjs/app:** upgrade from `0.8.0` to `0.8.1`
+* **@miaoxing/dev:** upgrade from `9.1.1` to `9.1.2`
+* **@mxjs/test:** upgrade from `2.0.0` to `2.0.1`
+* **@miaoxing/plugin:** upgrade from `0.15.0` to `0.15.1`
+* **@miaoxing/user:** upgrade from `0.5.21` to `0.5.22`
+* **@miaoxing/wechat:** upgrade from `0.1.35` to `0.1.36`
+
 ## [0.3.2](https://github.com/miaoxing/wechat-oa/compare/v0.3.1...v0.3.2) (2024-06-30)
 
 
