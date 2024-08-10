@@ -12,7 +12,7 @@ return new /**
  * @mixin UrlMixin
  * @mixin LoggerMixin
  */
-class () extends BasePage {
+class extends BasePage {
     protected const MAX_RETRY = 3;
     protected $controllerAuth = false;
 
