@@ -1,3 +1,28 @@
+## [0.3.6](https://github.com/miaoxing/wechat-oa/compare/v0.3.5...v0.3.6) (2024-09-01)
+
+
+### Features
+
+* 插件增加 wei 命令行入口 ([dd793b3](https://github.com/miaoxing/wechat-oa/commit/dd793b35125b046afc24e29be8cf8d8336916cfd))
+* 更新 `antd` 到 `~5.19` ([3879361](https://github.com/miaoxing/wechat-oa/commit/38793617aef930845d400c277d03cc6deb7ddc06))
+
+
+
+
+
+### Dependencies
+
+* **@mxjs/a-page:** upgrade from `4.0.2` to `4.1.0`
+* **@mxjs/a-form:** upgrade from `4.0.2` to `4.1.0`
+* **@mxjs/a-section:** upgrade from `1.1.1` to `1.2.0`
+* **miaoxing:** upgrade from `0.4.18` to `0.4.19`
+* **@mxjs/app:** upgrade from `0.8.2` to `0.8.3`
+* **@miaoxing/dev:** upgrade from `9.1.3` to `9.2.0`
+* **@mxjs/test:** upgrade from `2.0.3` to `2.0.4`
+* **@miaoxing/plugin:** upgrade from `0.15.2` to `0.16.0`
+* **@miaoxing/user:** upgrade from `0.5.24` to `0.5.25`
+* **@miaoxing/wechat:** upgrade from `0.1.37` to `0.1.38`
+
 ## [0.3.5](https://github.com/miaoxing/wechat-oa/compare/v0.3.4...v0.3.5) (2024-08-03)
 
 
