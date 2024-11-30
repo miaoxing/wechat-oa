@@ -19,9 +19,9 @@
     }
   },
   "require": {
-    "miaoxing/plugin": "^0.17.0",
-    "miaoxing/user": "^0.5.28",
-    "miaoxing/wechat": "^0.1.40"
+    "miaoxing/plugin": "^0.17.1",
+    "miaoxing/user": "^0.5.29",
+    "miaoxing/wechat": "^0.1.41"
   },
   "require-dev": {
     "miaoxing/dev": "^9.2.0"
@@ -41,7 +41,7 @@
       "miaoxing/phpstan-miaoxing": "miaoxing/phpstan-miaoxing as 3.x-dev",
       "miaoxing/plugin": "miaoxing/plugin as 0.17.x-dev",
       "miaoxing/services": "miaoxing/services as 0.9.x-dev",
-      "wei/wei": "twinh/wei as 0.17.x-dev",
+      "wei/wei": "twinh/wei as 0.18.x-dev",
       "miaoxing/wechat": "miaoxing/wechat as 0.1.x-dev"
     }
   },
