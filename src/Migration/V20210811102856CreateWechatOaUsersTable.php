@@ -32,7 +32,7 @@ class V20210811102856CreateWechatOaUsersTable extends BaseMigration
             ->string('tag_id_list', 64)->comment('被打上的标签ID列表')
             ->string('subscribe_scene', 32)->comment('关注的渠道来源')
             ->string('qr_scene', 32)->comment('二维码扫码场景')
-            ->string('qr_scene_str', 32)->comment('	二维码扫码场景描述')
+            ->string('qr_scene_str', 32)->comment('二维码扫码场景描述')
             ->timestamp('updated_info_at')->comment('最后更新信息时间')
             ->timestamps()
             ->userstamps()
