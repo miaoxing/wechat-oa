@@ -19,9 +19,9 @@
     }
   },
   "require": {
-    "miaoxing/plugin": "^0.17.4",
-    "miaoxing/user": "^0.5.32",
-    "miaoxing/wechat": "^0.1.44"
+    "miaoxing/plugin": "^0.17.5",
+    "miaoxing/user": "^0.5.33",
+    "miaoxing/wechat": "^0.1.45"
   },
   "require-dev": {
     "miaoxing/dev": "^9.3.1"
